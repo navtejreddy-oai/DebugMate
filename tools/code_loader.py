@@ -10,12 +10,14 @@ class CodeLoader:
         self.all_files = []
 
     def get_files_local(self, path: str):
+
         files = [f for f in listdir(path) if isfile(join(path, f))]
         dirs = [d for d in listdir(path) if isdir(join(path, d))]
         if not dirs and not files:
             return
         for dir in dirs:
             e = dir.split("/")
+            print(path + e[-1] + "/")
             self.get_files_local(path + e[-1] + "/")
         for file in files:
             if file[-3:] == ".py" or file[-5:] == ".java":
@@ -69,12 +71,13 @@ class CodeLoader:
         """stores interface to implemenation mapping in a dictionary for the entire repo"""
         path_tool_mappings = {}
         mapping = {}
+        print("path impl mapping", path)
         self.get_files_local(path)
         all_files = self.all_files
         count = 0
         print(len(all_files))
         for file in all_files:
-            temp_filename = file[len("/temp_java/") :]
+            temp_filename = file[len("./temp_java/") :]
             temp_class_name = temp_filename.split("/")[-1][: -len(".java")]
             path_tool_mappings[temp_class_name] = temp_filename
 
@@ -115,4 +118,4 @@ class CodeLoader:
 
 
 if __name__ == "__main__":
-    CodeLoader().impl_mapping("/temp_java/")
+    CodeLoader().impl_mapping("./temp_java/")

@@ -39,6 +39,14 @@ export EMAIL_ADDRESS="<your_confluence_email_address>"
     python tools/code_loader.py
     ```
 
+3. **Include new code bases to process**: 
+    - Open `tools/covertjar.py`
+    - Replace `<absolute_directory_path> ` with the absolute path of the compiled jar of your codebase
+    ```sh
+    python tools/covertjar.py
+    ```
+    this produces the decompiled code within temp_java 
+
 ## Usage
 
 **Update Stack Trace**: Place your stack trace in the stack_trace.txt file. This file will be used as input for the debugging process when provided.
